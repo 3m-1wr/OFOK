@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OFOK - لوحة الإدارة</title>
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="nav" id="nav"></header>
+  <main class="container" style="margin-bottom:44px">
+    <div class="pagehead"><h1>لوحة الإدارة</h1></div>
+    <div class="tabs" role="tablist" id="tabs">
+      <button class="tab active" data-tab="overview">نظرة عامة</button>
+      <button class="tab" data-tab="doctors">الدكاترة</button>
+      <button class="tab" data-tab="services">الخدمات</button>
+      <button class="tab" data-tab="settings">روابط التواصل</button>
+    </div>
+
+    <section id="overview">
+      <div style="display:flex;justify-content:flex-end">
+        <div class="seg three" id="period" role="group" aria-label="الفترة" style="min-width:300px">
+          <button type="button" data-p="30">آخر 30 يوم</button>
+          <button type="button" data-p="90">آخر 90 يوم</button>
+          <button type="button" data-p="0" class="active">كل الفترة</button>
+        </div>
+      </div>
+      <div id="err"></div>
+      <section class="kpis" id="kpis" aria-live="polite"></section>
+      <section class="grid2">
+        <div class="card"><h2>🏆 الأعلى تقييماً</h2><div id="topRated"></div></div>
+        <div class="card"><h2>💰 الأعلى ربحاً</h2><div id="topRevenue"></div></div>
+      </section>
+      <section class="grid2">
+        <div class="card"><h2>اتجاه الإيراد — آخر 6 شهور</h2><div id="trend"></div></div>
+        <div class="card"><h2>🦷 أكثر الخدمات حجزاً</h2><div id="topServices"></div></div>
+      </section>
+      <section class="card" style="margin-bottom:14px">
+        <h2>ترتيب كل الدكاترة <span class="muted" style="font-size:.8rem;font-weight:400">اضغط على عنوان العمود للترتيب</span></h2>
+        <div class="tablewrap"><table id="table"></table></div>
+      </section>
+      <p class="note" id="note"></p>
+    </section>
+
+    <section id="doctors" hidden>
+      <div class="toolbar"><h2 style="margin:0">الدكاترة وإعدادات العيادات</h2><button class="btn" id="addDoctor">+ إضافة دكتور</button></div>
+      <div class="tablewrap"><table id="docTable"></table></div>
+    </section>
+
+    <section id="services" hidden>
+      <div class="toolbar"><h2 style="margin:0">إدارة الخدمات</h2><button class="btn" id="addCat">+ قسم جديد</button></div>
+      <div id="catList"></div>
+    </section>
+
+    <section id="settings" hidden>
+      <form class="card" id="setForm" style="max-width:640px">
+        <h2>روابط التواصل الاجتماعي</h2>
+        <p class="muted" style="margin-top:-6px">بتظهر للمريض في تبويب "تواصل معنا" وأسفل الصفحات. سيبي الحقل فاضي لو مش عايزة تعرضي الرابط.</p>
+        <div class="field"><label for="st_facebook">فيسبوك</label><input id="st_facebook" type="url" dir="ltr" placeholder="https://www.facebook.com/..."></div>
+        <div class="field"><label for="st_instagram">إنستجرام</label><input id="st_instagram" type="url" dir="ltr" placeholder="https://www.instagram.com/..."></div>
+        <div class="field"><label for="st_linkedin">لينكد إن</label><input id="st_linkedin" type="url" dir="ltr" placeholder="https://www.linkedin.com/company/..."></div>
+        <button class="btn">حفظ الروابط</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- نموذج الدكتور (إضافة / تعديل) -->
+  <dialog class="modal" id="docDialog">
+    <form id="docForm" method="dialog">
+      <div class="mh"><h2 id="docTitle">دكتور</h2><button type="button" class="iconbtn" data-close aria-label="إغلاق">✕</button></div>
+      <div class="mb">
+        <div class="row">
+          <div class="field"><label for="d_name">اسم الدكتور</label><input id="d_name" required maxlength="80" placeholder="د. ..."></div>
+          <div class="field"><label for="d_specialty">التخصص الرئيسي</label><select id="d_specialty" required></select></div>
+          <div class="field"><label for="d_fee">سعر الكشف (جنيه)</label><input id="d_fee" type="number" min="0" value="300"></div>
+        </div>
+        <div class="row" id="accountRow">
+          <div class="field"><label for="d_email">البريد الإلكتروني (للدخول)</label><input id="d_email" type="email" autocomplete="off"></div>
+          <div class="field"><label for="d_password">كلمة المرور المبدئية</label><input id="d_password" type="text" minlength="6" autocomplete="off"></div>
+          <div class="field"><label for="d_phone">الموبايل</label><input id="d_phone" type="tel" maxlength="20"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="d_clinic">اسم الفرع/العيادة</label><input id="d_clinic" maxlength="80"></div>
+          <div class="field"><label for="d_address">العنوان</label><input id="d_address" maxlength="200"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="d_start">بداية الشغل (ساعة)</label><input id="d_start" type="number" min="0" max="23" value="10"></div>
+          <div class="field"><label for="d_end">نهاية الشغل (ساعة)</label><input id="d_end" type="number" min="1" max="24" value="18"></div>
+          <div class="field"><label for="d_slot">مدة الكشف</label>
+            <select id="d_slot"><option value="15">15 دقيقة</option><option value="20">20 دقيقة</option><option value="30" selected>30 دقيقة</option><option value="45">45 دقيقة</option><option value="60">ساعة</option></select></div>
+        </div>
+        <div class="field"><label>أيام الشغل</label><div class="checks" id="d_days"></div></div>
+        <div class="field"><label for="d_bio">نبذة</label><textarea id="d_bio" rows="2" maxlength="500"></textarea></div>
+        <div class="field"><label>الخدمات اللي بيقدمها</label><div class="svcpicker" id="d_services"></div></div>
+        <div id="docErr"></div>
+      </div>
+      <div class="mf"><button class="btn" id="docSave">حفظ</button><button type="button" class="btn ghost" data-close>إلغاء</button></div>
+    </form>
+  </dialog>
+
+  <!-- نموذج القسم / الخدمة -->
+  <dialog class="modal" id="nameDialog" style="width:min(520px,94vw)">
+    <form id="nameForm" method="dialog">
+      <div class="mh"><h2 id="nameTitle"></h2><button type="button" class="iconbtn" data-close aria-label="إغلاق">✕</button></div>
+      <div class="mb">
+        <div class="field" id="catPick" hidden><label for="n_cat">القسم</label><select id="n_cat"></select></div>
+        <div class="field"><label for="n_ar">الاسم بالعربي</label><input id="n_ar" required maxlength="100"></div>
+        <div class="field"><label for="n_en">الاسم بالإنجليزي (اختياري)</label><input id="n_en" maxlength="100" dir="ltr"></div>
+        <div id="nameErr"></div>
+      </div>
+      <div class="mf"><button class="btn">حفظ</button><button type="button" class="btn ghost" data-close>إلغاء</button></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OFOK - لوحة الدكتور</title>
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="nav" id="nav"></header>
+  <main class="container" style="margin-bottom:40px">
+    <div class="pagehead"><h1 id="title">لوحة الدكتور</h1></div>
+    <div class="stats" id="stats"></div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="bookings">الحجوزات</button>
+      <button class="tab" data-tab="reviews">التقييمات</button>
+      <button class="tab" data-tab="services">خدماتي</button>
+    </div>
+    <section id="bookings">
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <button class="btn secondary small" data-filter="today">النهاردة</button>
+        <button class="btn secondary small" data-filter="upcoming">القادمة</button>
+        <button class="btn secondary small" data-filter="all">الكل</button>
+      </div>
+      <div id="bookingsBody" aria-live="polite"></div>
+    </section>
+    <section id="reviews" hidden></section>
+    <section id="services" hidden></section>
+  </main>
+  <script type="module" src="/dashboard.js"></script>
+</body>
+</html>

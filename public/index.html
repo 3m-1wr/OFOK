@@ -1,0 +1,225 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>OFOK - تسجيل الدخول</title>
+
+    <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<main class="authpage">
+
+    <!-- Glass Login Panel -->
+    
+<section class="authcard">
+
+    <!-- Login / Signup Tabs -->
+    <div class="seg" role="tablist">
+
+        <button type="button"
+                role="tab"
+                data-mode="login"
+                class="active">
+            تسجيل الدخول
+        </button>
+
+        <button type="button"
+                role="tab"
+                data-mode="signup">
+            حساب جديد
+        </button>
+
+    </div>
+
+    <div id="err" aria-live="polite"></div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm">
+
+        <h1>Log in</h1>
+
+        <p class="form-subtitle">
+            <span>مرحباً بعودتك إلى OFOK</span>
+        </p>
+
+        <!-- Email -->
+        <div class="field">
+
+            <label for="l_email">
+                البريد الإلكتروني
+            </label>
+
+            <div class="input-wrapper">
+
+                <input
+                    id="l_email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    placeholder="أدخل البريد الإلكتروني"
+                >
+
+                <span class="input-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="m22 6-10 7L2 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+
+            <label for="l_password">
+                كلمة المرور
+            </label>
+
+            <div class="input-wrapper">
+
+                <input
+                    id="l_password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                    placeholder="أدخل كلمة المرور"
+                >
+
+                <span class="input-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="10" width="16" height="12" rx="2"/>
+                        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                        <path d="M12 15v3"/>
+                    </svg>
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" class="btn">
+            دخول
+            <span class="arrow">➜</span>
+        </button>
+
+        <!-- Demo Accounts -->
+        <details class="demo-accounts">
+
+            <summary>
+                <span>حسابات تجريبية</span>
+                <span class="demo-icon">♟</span>
+            </summary>
+
+            <div class="demo-content">
+
+                مريض:
+                patient@demo.com
+                <br>
+
+                دكتور:
+                doctor1@demo.com
+                <br>
+
+                أدمن:
+                admin@demo.com
+                <br>
+
+                كلمة المرور:
+                123456
+
+            </div>
+
+        </details>
+
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" hidden>
+
+        <h1>إنشاء حساب</h1>
+
+        <p class="form-subtitle">
+            مرحباً بك في OFOK
+        </p>
+
+        <div class="field">
+
+            <label for="s_name">الاسم</label>
+
+            <input
+                id="s_name"
+                required
+                maxlength="80"
+                autocomplete="name"
+                placeholder="الاسم بالكامل"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="s_phone">رقم الموبايل</label>
+
+            <input
+                id="s_phone"
+                type="tel"
+                maxlength="20"
+                autocomplete="tel"
+                placeholder="رقم الهاتف"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="s_email">البريد الإلكتروني</label>
+
+            <input
+                id="s_email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="البريد الإلكتروني"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="s_password">كلمة المرور</label>
+
+            <input
+                id="s_password"
+                type="password"
+                minlength="6"
+                required
+                autocomplete="new-password"
+                placeholder="6 حروف على الأقل"
+            >
+
+        </div>
+
+        <button type="submit" class="btn">
+            إنشاء الحساب
+        </button>
+
+    </form>
+
+</section>
+
+</main>
+
+<script type="module" src="/auth.js"></script>
+
+</body>
+</html>

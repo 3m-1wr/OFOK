@@ -1,0 +1,4 @@
+ofok.db*
+data.db*
+.secret
+node_modules

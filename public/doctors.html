@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OFOK - احجز دكتورك</title>
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="nav" id="nav"></header>
+
+  <section class="hero">
+    <div class="container"><h1>احجز دكتورك أونلاين</h1></div>
+  </section>
+
+  <main class="container">
+    <section class="searchbox">
+      <form class="card" id="searchForm">
+        <div class="searchgrid">
+          <div class="field"><label for="q">اسم الدكتور أو الخدمة</label><input id="q" type="search" placeholder="مثلاً: تقويم، زراعة، د. منى"></div>
+          <div class="field"><label for="specialty">التخصص</label><select id="specialty"><option value="">كل التخصصات</option></select></div>
+          <div class="field"><label for="service">الخدمة</label><select id="service"><option value="">كل الخدمات</option></select></div>
+          <button class="btn" type="submit">بحث</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="activeFilter"></div>
+    <div class="resultbar"><h2 id="count"></h2><a class="btn secondary small" href="/services.html">تصفح كل الخدمات</a></div>
+    <section id="list" class="docgrid" aria-live="polite"></section>
+  </main>
+
+  <footer id="footer"></footer>
+  <script type="module" src="/doctors.js"></script>
+</body>
+</html>
